@@ -50,6 +50,11 @@
 	<?php endif; ?>
 
 	<div class="entry-content">
+    
+    <?= the_subtitle(); ?>
+
+    <hr />
+
 		<?php
 		/* translators: %s: Name of current post */
 		the_content(
