@@ -1,7 +1,0 @@
-#!/bin/bash
-
-set -ex
-
-rm -vf output/out.zip
-zip output/out.zip piousbox_wp_plugin.php
-
