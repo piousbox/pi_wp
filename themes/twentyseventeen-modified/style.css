@@ -2029,6 +2029,19 @@ body.page:not(.twentyseventeen-front-page) .entry-title {
 	width: 48%;
 }
 
+/* Category technique */
+.items {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+}
+.items .item {
+  width: 32%;  
+  padding: 5px;
+}
+.items .item img {
+}
+
 /* Blog landing, search, archives */
 
 .blog .site-main > article,
@@ -3376,13 +3389,14 @@ p > object:only-child {
 
 	.has-sidebar:not(.error404) #primary {
 		float: left;
-		width: 58%;
+		width: 49%;
+    border-right: 1px solid red;
 	}
 
 	.has-sidebar #secondary {
 		float: right;
 		padding-top: 0;
-		width: 36%;
+		width: 50%;
 	}
 
 	.error404 #primary {
