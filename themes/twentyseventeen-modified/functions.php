@@ -9,6 +9,12 @@
  * @since 1.0
  */
 
+function pp_echo( $element, $label="" ) {
+  echo("+++ $label:<br />");
+  echo( var_dump( $element ) );
+  echo("<hr />");
+}
+
 /**
  * Twenty Seventeen only works in WordPress 4.7 or later.
  */

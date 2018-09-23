@@ -6,18 +6,11 @@
  */
 ?>
 
-
 <h2>2Technique</h2>
+
 <?php
 
-function pp_echo( $element, $label="" ) {
-  echo("+++ $label:<br />");
-  echo( var_dump( $element ) );
-  echo("<hr />");
-}
-
 function pparent( $input, $tails=[] ) {
-  // pp_echo( $input, 'input' );
   $i = $input->category_parent;
   array_unshift( $tails, $input );
   if ($i==0) {
@@ -38,9 +31,11 @@ function pparent( $input, $tails=[] ) {
   } else {
     $category = get_the_category()[0];
   }
+  $img = z_taxonomy_image_url($category->term_id);
+  echo( "<img src=$img alt='' /><br />" );
+
   $parent = $category->category_parent;
   $parent = get_term( $parent, 'category');
-  // echo("parent:{$parent->name}");echo("<hr />");
   pparent( $category );echo("<hr />");
 
   $immediate_args = array(

@@ -7,7 +7,9 @@
  * @link https://codex.wordpress.org/Template_Hierarchy
  */
 
-get_header(); ?>
+get_header(); 
+
+?>
 
 <div class="wrap">
 
@@ -23,38 +25,28 @@ get_header(); ?>
 	<div id="primary" class="content-area">
 		<main id="main" class="site-main" role="main">
 
-		<?php
-		if ( have_posts() ) :
-		?>
-			<?php
-			/* Start the Loop */
-			while ( have_posts() ) :
-				the_post();
+    <?
+        $category = get_category( get_query_var('cat') );
+        $args = array( 'category' => $category->term_id,
+          'tax_query' => array(
+            array(
+              'taxonomy' => 'category',
+              'field' => 'term_id',
+              'terms' => $category->term_id,
+              'include_children' => false
+            )
+          ) );
+        $posts_array = get_posts( $args );
+        forEach($posts_array as $post) {
+          $title = $post->post_title;
+          $link = get_permalink( $post );
 
-				/*
-				 * Include the Post-Format-specific template for the content.
-				 * If you want to override this in a child theme, then include a file
-				 * called content-___.php (where ___ is the Post Format name) and that will be used instead.
-				 */
-				get_template_part( 'template-parts/post/content', get_post_format() );
-
-			endwhile;
-
-			the_posts_pagination(
-				array(
-					'prev_text'          => twentyseventeen_get_svg( array( 'icon' => 'arrow-left' ) ) . '<span class="screen-reader-text">' . __( 'Previous page', 'twentyseventeen' ) . '</span>',
-					'next_text'          => '<span class="screen-reader-text">' . __( 'Next page', 'twentyseventeen' ) . '</span>' . twentyseventeen_get_svg( array( 'icon' => 'arrow-right' ) ),
-					'before_page_number' => '<span class="meta-nav screen-reader-text">' . __( 'Page', 'twentyseventeen' ) . ' </span>',
-				)
-			);
-
-		else :
-
-			get_template_part( 'template-parts/post/content', 'none' );
-
-		endif;
-		?>
-
+          echo "<h2><a href=$link>$title</a></h2>";
+          echo $post->post_content;
+          echo "<hr />";
+        }           
+    ?>
+    <hr />
 		</main><!-- #main -->
 	</div><!-- #primary -->
   <?php /* get_sidebar(); */ ?>
