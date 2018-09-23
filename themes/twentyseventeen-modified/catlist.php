@@ -1,12 +1,49 @@
-<h2>All Categories</h2>
+<?
+/**
+ * 20180823 _vp_
+ *
+ * The right-side list of categories
+ */
+?>
+
+
+<h2>2Technique</h2>
 <?php
-  function fn($data) { return $data; } $fn = 'fn';
 
-  $parent = get_category_by_slug('technique');
-  // var_dump( $parent );
+function pp_echo( $element, $label="" ) {
+  echo("+++ $label:<br />");
+  echo( var_dump( $element ) );
+  echo("<hr />");
+}
 
-  $category = get_category( get_query_var( 'cat' ) );
-  $args = array(
+function pparent( $input, $tails=[] ) {
+  // pp_echo( $input, 'input' );
+  $i = $input->category_parent;
+  array_unshift( $tails, $input );
+  if ($i==0) {
+    foreach($tails as $tail) {
+      $link = get_category_link( $tail );
+      echo(" <a href=$link>{$tail->name}</a> ::");
+    }
+  } else {
+    $i = get_category( $i );
+    pparent( $i, $tails );
+  }
+}
+
+  // echo(is_category() ? "in category" : "in a post");echo("<hr />");
+
+  if (is_category()) { 
+    $category = get_category( get_query_var('cat') );
+  } else {
+    $category = get_the_category()[0];
+  }
+  $parent = $category->category_parent;
+  $parent = get_term( $parent, 'category');
+  // echo("parent:{$parent->name}");echo("<hr />");
+  pparent( $category );echo("<hr />");
+
+  $immediate_args = array(
     'parent'            => $category->term_id,
     'hierarchical'        => true,
     'order'               => 'ASC',
@@ -14,8 +51,21 @@
     'show_count'          => 1,
     'use_desc_for_title'  => 1,
   );
-
-  $categories = get_categories( $args ); // and all children
+  $immediate_categories = get_categories( $immediate_args ); // and no children
+  $tmpl = '';
+  foreach($immediate_categories as $cat) {
+    $img = z_taxonomy_image_url($cat->term_id);
+    $link = get_category_link( $cat );
+    $tmp =<<<EOT
+<div class="item">
+  <h5><a href="$link">$cat->name</a></h5>
+  <img src="$img" alt="" />
+</div>
+EOT;
+   $tmpl = $tmpl . $tmp; 
+  }
+  echo("children:<div class='items'>$tmpl</div>");
+  echo("<hr />");
 
   $all_args = array(
     'child_of'            => $category->term_id,
@@ -25,10 +75,9 @@
     'show_count'          => 1,
     'use_desc_for_title'  => 1,
   );
-  $all_categories = get_categories( $all_args );
-
+  $all_categories = get_categories( $all_args ); // and no children
   $tmpl = '';
-  foreach($categories as $cat) {
+  foreach($all_categories as $cat) {
     $img = z_taxonomy_image_url($cat->term_id);
     $tmp =<<<EOT
 <div class="item">
@@ -37,12 +86,10 @@
 </div>
 EOT;
    $tmpl = $tmpl . $tmp; 
-    // echo z_taxonomy_image($cat->term_id); 
+  }
+  if ($category->name != 'Technique' ) {
+    // echo("siblings:<div class='items'>$tmpl</div>");
   }
 
-  echo("<div class='items'>$tmpl</div>");
-
-  echo "<ul>";
-  echo wp_list_categories( $all_args );
-  echo "</ul>";
+  echo "<ul>"; echo wp_list_categories( $all_args ); echo "</ul>";
 ?>

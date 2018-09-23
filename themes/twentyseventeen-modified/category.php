@@ -1,6 +1,9 @@
 <?php
 /**
+ * 20180923 _vp_
+ *
  * The template for displaying categories, under Technique
+ * Displays paginated list of videos on the left
  * @link https://codex.wordpress.org/Template_Hierarchy
  */
 
