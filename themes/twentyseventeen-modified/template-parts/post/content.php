@@ -7,6 +7,29 @@
 
 ?>
 
+<?
+$category = get_category( get_query_var('cat') );
+$category = get_the_category()[0];
+$args = array( 'category' => $category->term_id,
+  'tax_query' => array(
+    array(
+      'taxonomy' => 'category',
+      'field' => 'term_id',
+      'terms' => $category->term_id,
+      'include_children' => false
+    )
+  ) );
+$posts_array = get_posts( $args );
+forEach($posts_array as $post) {
+  $title = $post->post_title;
+  $link = get_permalink( $post );
+
+  echo "<h2><a href=$link>$title</a></h2>";
+  echo $post->post_content;
+  echo "<hr />";
+}
+?>
+
 <div class="article-wrapper">
 <article id="post-<?php the_ID(); ?>" <?php post_class(); ?>>
 	<?php
