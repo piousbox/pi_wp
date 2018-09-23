@@ -1,17 +1,13 @@
 <?php
 /**
+ * 20180923 _vp_
  * Template part for displaying posts
  *
- * @link https://codex.wordpress.org/Template_Hierarchy
- *
- * @package WordPress
- * @subpackage Twenty_Seventeen
- * @since 1.0
- * @version 1.2
  */
 
 ?>
 
+<div class="article-wrapper">
 <article id="post-<?php the_ID(); ?>" <?php post_class(); ?>>
 	<?php
 	if ( is_sticky() && is_home() ) :
@@ -39,6 +35,7 @@
 			the_title( '<h2 class="entry-title"><a href="' . esc_url( get_permalink() ) . '" rel="bookmark">', '</a></h2>' );
 		}
 		?>
+  <a href="javascript:void(0);" onClick="closeArticle()">X</a>
 	</header><!-- .entry-header -->
 
 	<?php if ( '' !== get_the_post_thumbnail() && ! is_single() ) : ?>
@@ -82,3 +79,4 @@
 	?>
 
 </article><!-- #post-## -->
+</div>

@@ -1,5 +1,8 @@
 <?php
 /**
+ * 20180923 _vp_
+ * enqueue js, css here
+ *
  * Twenty Seventeen functions and definitions
  *
  * @link https://developer.wordpress.org/themes/basics/theme-functions/
@@ -495,6 +498,12 @@ function twentyseventeen_scripts() {
 	if ( is_singular() && comments_open() && get_option( 'thread_comments' ) ) {
 		wp_enqueue_script( 'comment-reply' );
 	}
+
+  wp_enqueue_style( 'style', get_template_directory_uri() . '/assets/css/style.css', false, '0.0.0', 'all' );
+  wp_enqueue_script( 'script', get_template_directory_uri() . '/assets/js/script.js' ); 
+  // this screws up my styles. I just want a modal!
+  // wp_enqueue_style( 'materialize', get_template_directory_uri() . '/assets/css/materialize.min.css', false, '1.0.0', 'all' );
+
 }
 add_action( 'wp_enqueue_scripts', 'twentyseventeen_scripts' );
 
