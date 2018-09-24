@@ -6,7 +6,7 @@
  */
 ?>
 
-<h2>2Technique</h2>
+<!-- <h2 class="center" >Technique Categories</h2> -->
 
 <?php
 

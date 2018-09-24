@@ -29,6 +29,9 @@
   <header id="masthead" class="site-header" role="banner">
 
     <?php get_template_part( 'template-parts/header/header', 'image' ); ?>
+    <div class="search-wrapper">
+      <? get_template_part( 'template-parts/header/search' ); ?>
+    </div>
 
     <?php if ( has_nav_menu( 'top' ) ) : ?>
       <div class="navigation-top">
@@ -42,7 +45,6 @@
   </header><!-- #masthead -->
 
   <?php
-
   /*
    * If a regular post or page, and not the front page, show the featured image.
    * Using get_queried_object_id() here since the $post global may not be set before a call to the_post().

@@ -3390,13 +3390,14 @@ p > object:only-child {
 	.has-sidebar:not(.error404) #primary {
 		float: left;
 		width: 49%;
-    border-right: 1px solid red;
 	}
 
 	.has-sidebar #secondary {
 		float: right;
 		padding-top: 0;
 		width: 50%;
+    border-left: 1px solid red;
+    padding-left: .5em;
 	}
 
 	.error404 #primary {

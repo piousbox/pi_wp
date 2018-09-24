@@ -1,4 +1,45 @@
 
+/**
+ * utils
+ */
+.center {
+  text-align: center;
+}
+
+/**
+ * Header
+ */
+.site-branding {
+  padding: 1em;
+}
+
+.site-content {
+  padding-top: 0;
+}
+
+.custom-header {
+  width: 50%;
+  float: left;
+}
+
+.search-wrapper {
+  width: 50%;
+  height: 100%;
+  float: left;
+  height: 100px;
+  line-height: 100px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.search-wrapper form {
+  width: 80%;
+}
+
+/**
+ * page, artile
+ */
+
 .artile-wrapper {
   opacity: .5;
   background: black;
@@ -22,4 +63,10 @@ article {
   z-index: 100;
 }
 
+/**
+ * footer
+ */
+footer {
+  display: none;
+}
 
